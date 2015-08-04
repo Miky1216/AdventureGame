@@ -28,9 +28,10 @@ class GameBackground:
         pass
 
 class GameLoop:
-    def meleeAttack(self, RandLocationX, RandLocationY):
-        
-        heroFire = False
+    def meleeAttack(self, Hero, Enemy, lead_x, lead_y, RandLocationX, RandLocationY):
+        pass
+        #if (lead_x, lead_y) == (RandLocationX, RandLocationY):
+        #heroFire = False
     def rangeAttack(self):
         pass
     def AOEAttack(self):
@@ -46,9 +47,9 @@ class GameLoop:
         displayWidth = 800
         displayHeight = 600
 
-        heroSize = 10
-        enemySize = 10
-        FPS = 30
+        heroSize = 20
+        enemySize = 20
+        FPS = 20
         
         gameDisplay = pygame.display.set_mode((displayWidth,displayHeight))
         pygame.display.set_caption("Pancakes")
@@ -85,7 +86,7 @@ class GameLoop:
                         lead_y_change = heroSize
                     elif event.key == pygame.K_SPACE:
                         heroFire = True
-
+                    print "x " + str(lead_x), "y " + str(lead_y), "enemyX " + str(RandLocationX), "enemyY " + str(RandLocationY)
                 if heroFire:
                     if heroMelee:
                         meleeAttack()
@@ -103,8 +104,8 @@ class GameLoop:
             lead_y += lead_y_change
  
             gameDisplay.fill(white)
-            pygame.draw.rect(gameDisplay, black, [lead_x,lead_y,heroSize,heroSize])
-            pygame.draw.rect(gameDisplay, red, [RandLocationX, RandLocationY, enemySize, enemySize])
+            Hero = pygame.draw.rect(gameDisplay, black, [lead_x,lead_y,heroSize,heroSize])
+            Enemy = pygame.draw.rect(gameDisplay, red, [RandLocationX, RandLocationY, enemySize, enemySize])
             pygame.display.update()
 
             clock.tick(FPS)
