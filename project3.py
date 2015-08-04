@@ -23,8 +23,6 @@ class GameBackground:
         pass
 
 class GameLoop:
-    def heroMelee(self):
-        pass
     def meleeAttack(self):
         pass
     def rangeAttack(self):
@@ -81,6 +79,8 @@ class GameLoop:
                         lead_y_change = heroSize
                     elif event.key == pygame.K_SPACE:
                         heroFire = True
+                        
+                    print "hero x: " + str(lead_x), "y: " + str(lead_y), "    enemy x: " + str(RandLocationX), " y: " + str(RandLocationY)
 
                 if heroFire:
                     if heroMelee:
