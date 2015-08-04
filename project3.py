@@ -23,6 +23,15 @@ class GameBackground:
         pass
 
 class GameLoop:
+    def heroMelee(self):
+        pass
+    def meleeAttack(self):
+        pass
+    def rangeAttack(self):
+        pass
+    def AOEAttack(self):
+        pass
+
     def RunGame(self):
         pygame.init()
 
@@ -40,6 +49,10 @@ class GameLoop:
         FPS = 10
 
         gameExit = False
+        heroFire = False
+        heroMelee = False
+        heroRanged = False
+        heroAOE = False
 
         #PlayerName = UserInput()
 
@@ -63,6 +76,16 @@ class GameLoop:
                         lead_y_change = -BlockSize
                     elif event.key == pygame.K_DOWN:
                         lead_y_change = BlockSize
+                    elif event.key == pygame.K_SPACE:
+                        heroFire = True
+
+                if heroFire:
+                    if heroMelee:
+                        meleeAttack()
+                    if heroRanged:
+                        rangeAttack()
+                    if heroAOE:
+                        AOEAttack()
    
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
