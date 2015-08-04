@@ -39,14 +39,17 @@ class GameLoop:
         black = (0,0,0)
         red = (255,0,0)
 
-        DisplayWidth = 800
-        DisplayHeight = 600
+        displayWidth = 800
+        displayHeight = 600
 
-        gameDisplay = pygame.display.set_mode((DisplayWidth,DisplayHeight))
+        heroSize = 10
+        enemySize = 10
+        FPS = 30
+        
+        gameDisplay = pygame.display.set_mode((displayWidth,displayHeight))
         pygame.display.set_caption("Pancakes")
-
-        BlockSize = 10
-        FPS = 10
+        RandLocationX = round(random.randrange(0, displayWidth-heroSize)/10.0)*10.0
+        RandLocationY = round(random.randrange(0, displayHeight-heroSize)/10.0)*10.0
 
         gameExit = False
         heroFire = False
@@ -69,13 +72,13 @@ class GameLoop:
                     gameExit = True
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        lead_x_change = -BlockSize
+                        lead_x_change = -heroSize
                     elif event.key == pygame.K_RIGHT:
-                        lead_x_change = BlockSize
+                        lead_x_change = heroSize
                     elif event.key == pygame.K_UP:
-                        lead_y_change = -BlockSize
+                        lead_y_change = -heroSize
                     elif event.key == pygame.K_DOWN:
-                        lead_y_change = BlockSize
+                        lead_y_change = heroSize
                     elif event.key == pygame.K_SPACE:
                         heroFire = True
 
@@ -96,11 +99,11 @@ class GameLoop:
             lead_y += lead_y_change
  
             gameDisplay.fill(white)
-            for x in range(0,255):
-                pygame.draw.rect(gameDisplay, black, [lead_x,lead_y,BlockSize,BlockSize])
-                pygame.display.update()
+            pygame.draw.rect(gameDisplay, black, [lead_x,lead_y,heroSize,heroSize])
+            pygame.draw.rect(gameDisplay, red, [RandLocationX, RandLocationY, enemySize, enemySize])
+            pygame.display.update()
 
-                #clock.tick(FPS)
+            clock.tick(FPS)
 
         pygame.quit()
         quit()
