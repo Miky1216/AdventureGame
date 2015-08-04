@@ -3,6 +3,11 @@ import time
 import random
 import sys
 
+#class Hero:
+
+#class Enemies:
+
+
 class UserInput:
     def EnterHeroName(self):
         HeroName = ""
@@ -23,10 +28,9 @@ class GameBackground:
         pass
 
 class GameLoop:
-    def heroMelee(self):
-        pass
-    def meleeAttack(self):
-        pass
+    def meleeAttack(self, RandLocationX, RandLocationY):
+        
+        heroFire = False
     def rangeAttack(self):
         pass
     def AOEAttack(self):
