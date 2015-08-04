@@ -40,8 +40,8 @@ class GameLoop:
         displayWidth = 800
         displayHeight = 600
 
-        heroSize = 10
-        enemySize = 10
+        heroSize = 20
+        enemySize = 20
         FPS = 30
         
         gameDisplay = pygame.display.set_mode((displayWidth,displayHeight))
@@ -97,6 +97,14 @@ class GameLoop:
 
             lead_x += lead_x_change
             lead_y += lead_y_change
+            if lead_x >= displayWidth:
+                lead_x = displayWidth-heroSize
+            if lead_y >= displayHeight:
+                lead_y = displayHeight-heroSize
+            if lead_x <= 0:
+                lead_x = 0
+            if lead_y <= 0:
+                lead_y = 0
  
             gameDisplay.fill(white)
             pygame.draw.rect(gameDisplay, black, [lead_x,lead_y,heroSize,heroSize])
