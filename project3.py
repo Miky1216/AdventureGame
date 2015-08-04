@@ -84,11 +84,11 @@ class GameLoop:
 
                 if heroFire:
                     if heroMelee:
-                        meleeAttack()
+                        self.meleeAttack()
                     if heroRanged:
-                        rangeAttack()
+                        self.rangeAttack()
                     if heroAOE:
-                        AOEAttack()
+                        self.AOEAttack()
    
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
