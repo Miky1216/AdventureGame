@@ -46,8 +46,8 @@ class GameLoop:
         
         gameDisplay = pygame.display.set_mode((displayWidth,displayHeight))
         pygame.display.set_caption("Pancakes")
-        RandLocationX = round(random.randrange(0, displayWidth-heroSize)/10.0)*10.0
-        RandLocationY = round(random.randrange(0, displayHeight-heroSize)/10.0)*10.0
+        RandLocationX = round(random.randrange(0, displayWidth-heroSize)/20.0)*20.0
+        RandLocationY = round(random.randrange(0, displayHeight-heroSize)/20.0)*20.0
 
         gameExit = False
         heroFire = False
