@@ -81,35 +81,37 @@ class GameLoop:
         screen.blit(sprite.backgroundVampire.image, sprite.backgroundVampire.rect.topleft)
         screen.blit(sprite.backgroundPrincess.image, sprite.backgroundPrincess.rect.topleft)
         pygame.display.update()
-    def meleeAttack(self, direction, lead_x, lead_y, screen, sprite):
+    def meleeAttack(self, direction, screen, sprite):
         pass
-    def rangeAttack(self, direction, lead_x, lead_y, screen, sprite):
+    def rangeAttack(self, direction, screen, sprite):
         sprite.fryingPan.rect = sprite.fryingPan.image.get_rect()
+        x = sprite.hero.rect.topleft[0]
+        y = sprite.hero.rect.topleft[1]
         if direction == 1:
-            for lead_y in range (lead_y, 0, -10):
-                sprite.fryingPan.rect.topleft = (lead_x, lead_y)
+            for y in range (y, 0, -10):
+                sprite.fryingPan.rect.topleft = (sprite.hero.rect.topleft[0], y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
         if direction == 2:
-            for lead_x in range (lead_x, 1200, 10):
-                sprite.fryingPan.rect.topleft = (lead_x, lead_y)
+            for x in range (x, 1200, 10):
+                sprite.fryingPan.rect.topleft = (x, y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
         if direction == 3:
-            for lead_y in range (lead_y, 800, 10):
-                sprite.fryingPan.rect.topleft = (lead_x, lead_y)
+            for y in range (y, 800, 10):
+                sprite.fryingPan.rect.topleft = (x, y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
         if direction == 4:
-            for lead_x in range (lead_x, 0, -10):
-                sprite.fryingPan.rect.topleft = (lead_x, lead_y)
+            for x in range (x, 0, -10):
+                sprite.fryingPan.rect.topleft = (x, y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
-    def AOEAttack(self, direction, lead_x, lead_y, screen, sprite):
+    def AOEAttack(self, direction, screen, sprite):
         pass
     def RunGame(self):
         pygame.init()
