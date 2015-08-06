@@ -25,11 +25,11 @@ class userInput:
         return HeroName
 
 class MapDesign:
-    def GenerateRandomMap():
-        Quad1Coordinates = pygame.draw.rect(gameDisplay, white, [0,0])
-        Quad2Coordinates = pygame.draw.rect(gameDisplay, white, [400,0])
-        Quad3Coordinates = pygame.draw.rect(gameDisplay, white, [0,300])
-        Quad4Coordinates = pygame.draw.rect(gameDisplay, white, [400,600])
+    def GenerateRandomMap(self, backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect):
+        #Quad1Coordinates = pygame.draw.rect(gameDisplay, white, [0,0])
+        #Quad2Coordinates = pygame.draw.rect(gameDisplay, white, [400,0])
+        #Quad3Coordinates = pygame.draw.rect(gameDisplay, white, [0,300])
+        #Quad4Coordinates = pygame.draw.rect(gameDisplay, white, [400,600])
         
         backgroundImage1Rect.topleft = (110, 80)
         backgroundImage2Rect.topleft = (820, 30)
@@ -56,16 +56,7 @@ class MapDesign:
             backgroundImage2Rect.topleft = (750, 490)
             backgroundImage3Rect.topleft = (110, 80)
             backgroundImage4Rect.topleft = (820, 30)
-    def DesignedBackground(self):
-        pass
-    def FirstQuadrantBackground(self):
-        pass
-    def SecondQuadrantBackground(self): 
-        pass
-    def ThirdQuadrantBackground(self):
-        pass
-    def FourthQuadrantBackground(self):
-        pass
+
 
 class GameLoop:
     def meleeAttack(self):
@@ -110,7 +101,6 @@ class GameLoop:
         backgroundImage2 = sprites('QuadImage2.png', 1, 1, color)
         backgroundImage3 = sprites('QuadImage3.png', 1, 1, color)
         backgroundImage4 = sprites('QuadImage4.png', 1, 1, color)
-        #PlayerName = UserInput()
 
         lead_x = 300
         lead_y = 300
@@ -135,9 +125,10 @@ class GameLoop:
         backgroundImage4Rect.topleft = (750, 490)
         
         pygame.mouse.set_visible(False)
- 
+        
+        GenerateRandomBackground = MapDesign()
+        RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect)
         while not gameExit:
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     gameExit = True
