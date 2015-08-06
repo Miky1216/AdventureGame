@@ -160,24 +160,36 @@ class GameLoop:
                 sprite.fryingPan.rect.topleft = (sprite.hero.rect.topleft[0], y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top) 
+                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+                    print 'Collision Detected!!!!!!!!!!!!!!!!!!!!!'
                 self.display(screen, sprite, 0, 0)
         if direction == 2:
             for x in range (x, 1200, 10):
                 sprite.fryingPan.rect.topleft = (x, y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top) 
+                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+                    print 'Collision Detected!!!!!!!!!!!!!!!!!!!!!'
                 self.display(screen, sprite, 0, 0)
         if direction == 3:
             for y in range (y, 800, 10):
                 sprite.fryingPan.rect.topleft = (x, y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top) 
+                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+                    print 'Collision Detected!!!!!!!!!!!!!!!!!!!!!'
                 self.display(screen, sprite, 0, 0)
         if direction == 4:
             for x in range (x, 0, -10):
                 sprite.fryingPan.rect.topleft = (x, y)
                 screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top) 
+                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+                    print 'Collision Detected!!!!!!!!!!!!!!!!!!!!!'
                 self.display(screen, sprite, 0, 0)
     def AOEAttack(self, direction, screen, sprite):
         pass
