@@ -4,7 +4,8 @@ import random
 import sys
 
 class sprites(pygame.sprite.Sprite):
-    def __init__(self, image, x, y, color):
+    def __init__(self, image, x, y):
+        color = colors()
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(image).convert()
         self.image.set_colorkey(color.white)
@@ -59,15 +60,38 @@ class MapDesign:
 
 
 class GameLoop:
-    def meleeAttack(self, direction, lead_x, lead_y):
-        fryingPan = sprites('fryingPan.png', 1, 1, color)
-        fryingPanRect.topleft = (lead_x, lead_y)
-    def rangeAttack(self, direction, lead_x, lead_y):
-        fryingPan = sprites('fryingPan.png', 1, 1, color)
-        fryingPanRect.topleft = (lead_x, lead_y)
-    def AOEAttack(self, direction, lead_x, lead_y):
-        fryingPan = sprites('fryingPan.png', 1, 1, color)
-        fryingPanRect.topleft = (lead_x, lead_y)
+    def meleeAttack(self, direction, lead_x, lead_y, screen):
+        pass
+    def rangeAttack(self, direction, lead_x, lead_y, screen):
+        color = colors()
+        fryingPan = sprites('fryingPan.png', 1, 1)
+        fryingPanRect = fryingPan.image.get_rect()
+        if direction == 1:
+            for lead_y in range (lead_y, 0, -1):
+                fryingPanRect.topleft = (lead_x, lead_y)
+                screen.fill((color.white))
+                screen.blit(fryingPan.image, fryingPanRect.topleft)
+                pygame.display.update()
+        if direction == 2:
+            for lead_x in range (lead_x, 1200):
+                fryingPanRect.topleft = (lead_x, lead_y)
+                screen.fill((color.white))
+                screen.blit(fryingPan.image, fryingPanRect.topleft)
+                pygame.display.update()
+        if direction == 3:
+            for lead_y in range (lead_y, 800):
+                fryingPanRect.topleft = (lead_x, lead_y)
+                screen.fill((color.white))
+                screen.blit(fryingPan.image, fryingPanRect.topleft)
+                pygame.display.update()
+        if direction == 4:
+            for lead_x in range (lead_x, 0, -1):
+                fryingPanRect.topleft = (lead_x, lead_y)
+                screen.fill((color.white))
+                screen.blit(fryingPan.image, fryingPanRect.topleft)
+                pygame.display.update()
+    def AOEAttack(self, direction, lead_x, lead_y, screen):
+        pass
     def RunGame(self):
         LinePointX1 = 600
         LinePointY1 = 0
@@ -92,18 +116,17 @@ class GameLoop:
         FPS = 30
         color = colors()
         gameExit = False
-        heroFire = False
-        heroMelee = True
-        heroRanged = False
+        heroMelee = False
+        heroRanged = True
         heroAOE = False
 
-        hero = sprites('hero.png', 1, 1, color)
-        meleeEnemy = sprites('meleeEnemy.png', 1, 1, color)
-        powerUp = sprites('powerUp.png', 1, 1, color)
-        backgroundImage1 = sprites('QuadImage1.png', 1, 1, color)
-        backgroundImage2 = sprites('QuadImage2.png', 1, 1, color)
-        backgroundImage3 = sprites('QuadImage3.png', 1, 1, color)
-        backgroundImage4 = sprites('QuadImage4.png', 1, 1, color)
+        hero = sprites('hero.png', 1, 1)
+        meleeEnemy = sprites('meleeEnemy.png', 1, 1)
+        powerUp = sprites('powerUp.png', 1, 1)
+        backgroundImage1 = sprites('QuadImage1.png', 1, 1)
+        backgroundImage2 = sprites('QuadImage2.png', 1, 1)
+        backgroundImage3 = sprites('QuadImage3.png', 1, 1)
+        backgroundImage4 = sprites('QuadImage4.png', 1, 1)
 
         lead_x = 10
         lead_y = 10
@@ -128,8 +151,6 @@ class GameLoop:
         backgroundImage3Rect.topleft = (210, 510)
         backgroundImage4Rect.topleft = (750, 490)
 
-        pygame.mouse.set_visible(False)
-
         GenerateRandomBackground = MapDesign()
         RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect)
         while not gameExit:
@@ -150,17 +171,12 @@ class GameLoop:
                         lead_y_change = pixelMove
                         direction = 3
                     elif event.key == pygame.K_SPACE:
-                        heroFire = True
-
-                    print "hero x: " + str(lead_x), "y: " + str(lead_y), "    enemy: " + str(pygame.mouse.get_pos())
-
-                if heroFire:
-                    if heroMelee:
-                        self.meleeAttack(direction, lead_x, lead_y)
-                    if heroRanged:
-                        self.rangeAttack(direction, lead_x, lead_y)
-                    if heroAOE:
-                        self.AOEAttack(direction, lead_x, lead_y)
+                        if heroMelee:
+                            self.meleeAttack(direction, lead_x, lead_y, screen)
+                        if heroRanged:
+                            self.rangeAttack(direction, lead_x, lead_y, screen)
+                        if heroAOE:
+                            self.AOEAttack(direction, lead_x, lead_y, screen)
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
@@ -172,7 +188,7 @@ class GameLoop:
             if lead_x >= displayWidth:
                 lead_x = displayWidth-pixelMove
             if lead_y >= displayHeight:
-                lead_y = displayHeight-pixelMove
+                lead_y = displayHeight-50
             if lead_x <= 0:
                 lead_x = 0
             if lead_y <= 0:
