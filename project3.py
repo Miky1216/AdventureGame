@@ -26,37 +26,64 @@ class userInput:
         return HeroName
 
 class MapDesign:
-    def GenerateRandomMap(self, backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect):
-        #Quad1Coordinates = pygame.draw.rect(gameDisplay, white, [0,0])
-        #Quad2Coordinates = pygame.draw.rect(gameDisplay, white, [400,0])
-        #Quad3Coordinates = pygame.draw.rect(gameDisplay, white, [0,300])
-        #Quad4Coordinates = pygame.draw.rect(gameDisplay, white, [400,600])
-
+    def GenerateRandomMap(self, backgroundSpaceRect, backgroundJakeHimselfRect, backgroundIceKingRect, backgroundFinnRect, backgroundJakeFinnRect, backgroundFinnUnicornRect, backgroundPenguinRect, backgroundCupcakeRect, backgroundPurpleCloudRect, backgroundVampireRect, backgroundPrincessRect):
+        """backgroundSpace.topleft = (0,0)
         backgroundImage1Rect.topleft = (110, 80)
-        backgroundImage2Rect.topleft = (820, 30)
-        backgroundImage3Rect.topleft = (210, 510)
-        backgroundImage4Rect.topleft = (750, 490)
-        RandomMapGenerator = random.randint(1,4)
+        backgroundImage2Rect.topleft = (620, 50)
+        backgroundImage3Rect.topleft = (80, 400)
+        backgroundImage4Rect.topleft = (650, 410)
+        backgroundImage5Rect.topleft = (350, 500)
+        backgroundImage6Rect.topleft = (50, 650)
+        backgroundImage7Rect.topleft = (900, 550)
+        backgroundImage8Rect.topleft = (950, 275)
+        backgroundImage9Rect.topleft = (500, 275)
+        backgroundImage10Rect.topleft = (665, 600)"""
+         
+        RandomMapGenerator = random.randint(1,2)
         if RandomMapGenerator == 1:
-            backgroundImage1Rect.topleft = (110, 80)
-            backgroundImage2Rect.topleft = (820, 30)
-            backgroundImage3Rect.topleft = (210, 510)
-            backgroundImage4Rect.topleft = (750, 490)
+            backgroundJakeHimselfRect.topleft = (110, 80)
+            backgroundIceKingRect.topleft = (620, 30)
+            backgroundFinnRect.topleft = (980, 80)
+            backgroundJakeFinnRect.topleft = (650, 410)
+            backgroundFinnUnicornRect.topleft = (350, 500)
+            backgroundPenguinRect.topleft = (50, 450)
+            backgroundCupcakeRect.topleft = (900, 600)
+            backgroundPurpleCloudRect.topleft = (950, 275)
+            backgroundVampireRect.topleft = (500, 275)
+            backgroundPrincessRect.topleft = (665, 600)
         if RandomMapGenerator == 2:
-            backgroundImage1Rect.topleft = (820, 30)
-            backgroundImage2Rect.topleft = (110, 80)
-            backgroundImage3Rect.topleft = (750, 490)
-            backgroundImage4Rect.topleft = (210, 510)
-        if RandomMapGenerator == 3:
+            backgroundJakeHimselfRect.topleft = (820, 30)
+            backgroundIceKingRect.topleft = (110, 80)
+            backgroundFinnRect.topleft = (750, 300)
+            backgroundJakeFinnRect.topleft = (210, 510)
+            backgroundFinnUnicornRect.topleft = (50, 650)
+            backgroundPenguinRect.topleft = (350, 500)
+            backgroundCupcakeRect.topleft = (950, 275)
+            backgroundPurpleCloudRect.topleft = (1000, 500)
+            backgroundVampireRect.topleft = (665, 600)
+            backgroundPrincessRect.topleft = (500, 275)
+        """if RandomMapGenerator == 3:
             backgroundImage1Rect.topleft = (750, 490)
             backgroundImage2Rect.topleft = (210, 510)
             backgroundImage3Rect.topleft = (820, 30)
             backgroundImage4Rect.topleft = (110, 80)
+            backgroundImage5Rect.topleft = (350, 500)
+            backgroundImage6Rect.topleft = (50, 650)
+            backgroundImage7Rect.topleft = (1000, 500)
+            backgroundImage8Rect.topleft = (950, 275)
+            backgroundImage9Rect.topleft = (500, 275)
+            backgroundImage10Rect.topleft = (665, 600)
         if RandomMapGenerator == 4:
             backgroundImage1Rect.topleft = (210, 510)
             backgroundImage2Rect.topleft = (750, 490)
             backgroundImage3Rect.topleft = (110, 80)
             backgroundImage4Rect.topleft = (820, 30)
+            backgroundImage5Rect.topleft = (350, 500)
+            backgroundImage6Rect.topleft = (50, 650)
+            backgroundImage7Rect.topleft = (1000, 500)
+            backgroundImage8Rect.topleft = (950, 275)
+            backgroundImage9Rect.topleft = (500, 275)
+            backgroundImage10Rect.topleft = (665, 600)"""
 
 
 class GameLoop:
@@ -120,14 +147,20 @@ class GameLoop:
         heroRanged = True
         heroAOE = False
 
+        backgroundSpace = sprites('space.png', 1, 1)
         hero = sprites('hero.png', 1, 1)
         meleeEnemy = sprites('meleeEnemy.png', 1, 1)
         powerUp = sprites('powerUp.png', 1, 1)
-        backgroundImage1 = sprites('QuadImage1.png', 1, 1)
-        backgroundImage2 = sprites('QuadImage2.png', 1, 1)
-        backgroundImage3 = sprites('QuadImage3.png', 1, 1)
-        backgroundImage4 = sprites('QuadImage4.png', 1, 1)
-
+        backgroundJakeHimself = sprites('QuadImage1.png', 1, 1)
+        backgroundIceKing = sprites('QuadImage2.png', 1, 1)
+        backgroundFinn = sprites('QuadImage3.png', 1, 1)
+        backgroundJakeFinn = sprites('QuadImage4.png', 1, 1)
+        backgroundFinnUnicorn = sprites('QuadImage5.png', 1, 1)
+        backgroundPenguin = sprites('QuadImage6.png', 1, 1)
+        backgroundCupcake = sprites('QuadImage7.png', 1, 1)
+        backgroundPurpleCloud = sprites('QuadImage8.png', 1, 1)
+        backgroundVampire = sprites('QuadImage9.png', 1, 1)
+        backgroundPrincess = sprites('QuadImage10.png', 1, 1)
         lead_x = 10
         lead_y = 10
         lead_x_change = 0
@@ -138,21 +171,24 @@ class GameLoop:
         heroRect = hero.image.get_rect()
         meleeEnemyRect = meleeEnemy.image.get_rect()
         powerUpRect = powerUp.image.get_rect()
-        backgroundImage1Rect = backgroundImage1.image.get_rect()
-        backgroundImage2Rect = backgroundImage2.image.get_rect()
-        backgroundImage3Rect = backgroundImage3.image.get_rect()
-        backgroundImage4Rect = backgroundImage4.image.get_rect()
+        backgroundSpaceRect = backgroundSpace.image.get_rect()
+        backgroundJakeHimselfRect = backgroundJakeHimself.image.get_rect()
+        backgroundIceKingRect = backgroundIceKing.image.get_rect()
+        backgroundFinnRect = backgroundFinn.image.get_rect()
+        backgroundJakeFinnRect = backgroundJakeFinn.image.get_rect()
+        backgroundFinnUnicornRect = backgroundFinnUnicorn.image.get_rect()
+        backgroundPenguinRect = backgroundPenguin.image.get_rect()
+        backgroundCupcakeRect = backgroundCupcake.image.get_rect()
+        backgroundPurpleCloudRect = backgroundPurpleCloud.image.get_rect()
+        backgroundVampireRect = backgroundVampire.image.get_rect()
+        backgroundPrincessRect = backgroundPrincess.image.get_rect()
 
         heroRect.topleft = (0, 400)
         meleeEnemyRect.topleft = (50, 50)
-        powerUpRect.topleft = (600, 600)
-        backgroundImage1Rect.topleft = (110, 80)
-        backgroundImage2Rect.topleft = (820, 30)
-        backgroundImage3Rect.topleft = (210, 510)
-        backgroundImage4Rect.topleft = (750, 490)
-
+        #powerUpRect.topleft = (600, 600)
+        
         GenerateRandomBackground = MapDesign()
-        RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect)
+        RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(backgroundSpaceRect, backgroundJakeHimselfRect, backgroundIceKingRect, backgroundFinnRect, backgroundJakeFinnRect, backgroundFinnUnicornRect, backgroundPenguinRect, backgroundCupcakeRect, backgroundPurpleCloudRect, backgroundVampireRect, backgroundPrincessRect)
         while not gameExit:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -197,42 +233,49 @@ class GameLoop:
             #meleeEnemyRect.topleft = pygame.mouse.get_pos()
             heroRect.topleft = (lead_x, lead_y)
 
-            screen.fill(color.white)
+            screen.blit(backgroundSpace.image, backgroundSpaceRect.topleft)
+            #screen.fill(color.white)
             screen.blit(hero.image, heroRect.topleft)
             screen.blit(meleeEnemy.image, meleeEnemyRect.topleft)
             screen.blit(powerUp.image, powerUpRect.topleft)
-            screen.blit(backgroundImage1.image, backgroundImage1Rect.topleft)
-            screen.blit(backgroundImage2.image, backgroundImage2Rect.topleft)
-            screen.blit(backgroundImage3.image, backgroundImage3Rect.topleft)
-            screen.blit(backgroundImage4.image, backgroundImage4Rect.topleft)
-
+            screen.blit(backgroundJakeHimself.image, backgroundJakeHimselfRect.topleft)
+            screen.blit(backgroundIceKing.image, backgroundIceKingRect.topleft)
+            screen.blit(backgroundFinn.image, backgroundFinnRect.topleft)
+            screen.blit(backgroundJakeFinn.image, backgroundJakeFinnRect.topleft)
+            screen.blit(backgroundFinnUnicorn.image, backgroundFinnUnicornRect.topleft)
+            screen.blit(backgroundPenguin.image, backgroundPenguinRect.topleft)
+            screen.blit(backgroundCupcake.image, backgroundCupcakeRect.topleft)
+            screen.blit(backgroundPurpleCloud.image, backgroundPurpleCloudRect.topleft)
+            screen.blit(backgroundVampire.image, backgroundVampireRect.topleft)
+            screen.blit(backgroundPrincess.image, backgroundPrincessRect.topleft)
+            
             #Vertical Line
-            pygame.draw.line(screen, color.black, [LinePointX1, LinePointY1], [LinePointX2, LinePointY2], LineThickness)
+            #pygame.draw.line(screen, color.black, [LinePointX1, LinePointY1], [LinePointX2, LinePointY2], LineThickness)
             #Horizontal Line
-            pygame.draw.line(screen, color.black, [LinePointX3, LinePointY3], [LinePointX4, LinePointY4], LineThickness)
+            #pygame.draw.line(screen, color.black, [LinePointX3, LinePointY3], [LinePointX4, LinePointY4], LineThickness)
 
             offset_x, offset_y = (meleeEnemyRect.left - heroRect.left), (meleeEnemyRect.top - heroRect.top)
             if (hero.imageMask.overlap(meleeEnemy.imageMask, (offset_x, offset_y)) != None):
                 lead_x -= lead_x_change
                 lead_y -= lead_y_change
                 print 'Collision Detected!'
-            offset_x, offset_y = (backgroundImage1Rect.left - heroRect.left), (backgroundImage1Rect.top - heroRect.top)
-            if (hero.imageMask.overlap(backgroundImage1.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (backgroundJakeHimselfRect.left - heroRect.left), (backgroundJakeHimselfRect.top - heroRect.top)
+            if (hero.imageMask.overlap(backgroundJakeHimself.imageMask, (offset_x, offset_y)) != None):
                 lead_x -= lead_x_change
                 lead_y -= lead_y_change
                 print 'Collision Detected!'
-            offset_x, offset_y = (backgroundImage2Rect.left - heroRect.left), (backgroundImage2Rect.top - heroRect.top)
-            if (hero.imageMask.overlap(backgroundImage2.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (backgroundIceKingRect.left - heroRect.left), (backgroundIceKingRect.top - heroRect.top)
+            if (hero.imageMask.overlap(backgroundIceKing.imageMask, (offset_x, offset_y)) != None):
                 lead_x -= lead_x_change
                 lead_y -= lead_y_change
                 print 'Collision Detected!'
-            offset_x, offset_y = (backgroundImage3Rect.left - heroRect.left), (backgroundImage3Rect.top - heroRect.top)
-            if (hero.imageMask.overlap(backgroundImage3.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (backgroundFinnRect.left - heroRect.left), (backgroundFinnRect.top - heroRect.top)
+            if (hero.imageMask.overlap(backgroundFinn.imageMask, (offset_x, offset_y)) != None):
                 lead_x -= lead_x_change
                 lead_y -= lead_y_change
                 print 'Collision Detected!'
-            offset_x, offset_y = (backgroundImage4Rect.left - heroRect.left), (backgroundImage4Rect.top - heroRect.top)
-            if (hero.imageMask.overlap(backgroundImage4.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (backgroundJakeFinnRect.left - heroRect.left), (backgroundJakeFinnRect.top - heroRect.top)
+            if (hero.imageMask.overlap(backgroundJakeFinn.imageMask, (offset_x, offset_y)) != None):
                 lead_x -= lead_x_change
                 lead_y -= lead_y_change
                 print 'Collision Detected!'
