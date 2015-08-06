@@ -202,19 +202,22 @@ class GameLoop:
                 print 'Collision Detected!'
             else:
                 print 'None'
-            #offset_x, offset_y = (backgroundImage1Rect.left - heroRect.left), (backgroundImage1Rect.top - heroRect.top)
+            offset_x, offset_y = (backgroundImage1Rect.left - heroRect.left), (backgroundImage1Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage1.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
+            offset_x, offset_y = (backgroundImage2Rect.left - heroRect.left), (backgroundImage2Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage2.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
+            offset_x, offset_y = (backgroundImage3Rect.left - heroRect.left), (backgroundImage3Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage3.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
+            offset_x, offset_y = (backgroundImage4Rect.left - heroRect.left), (backgroundImage4Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage4.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
