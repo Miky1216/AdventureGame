@@ -20,7 +20,7 @@ class colors:
 class userInput:
     def EnterHeroName(self):
         HeroName = ""
-        while HeroName is "":
+        while HeroName == "":
             HeroName = raw_input("Enter the name of your hero: ")
         return HeroName
 
@@ -105,8 +105,8 @@ class GameLoop:
         backgroundImage3 = sprites('QuadImage3.png', 1, 1, color)
         backgroundImage4 = sprites('QuadImage4.png', 1, 1, color)
 
-        lead_x = 300
-        lead_y = 300
+        lead_x = 10
+        lead_y = 10
         lead_x_change = 0
         lead_y_change = 0
         pixelMove = 10
@@ -121,7 +121,7 @@ class GameLoop:
         backgroundImage4Rect = backgroundImage4.image.get_rect()
 
         heroRect.topleft = (0, 400)
-        meleeEnemyRect.topleft = (0, 0)
+        meleeEnemyRect.topleft = (50, 50)
         powerUpRect.topleft = (600, 600)
         backgroundImage1Rect.topleft = (110, 80)
         backgroundImage2Rect.topleft = (820, 30)
@@ -195,32 +195,32 @@ class GameLoop:
             #Horizontal Line
             pygame.draw.line(screen, color.black, [LinePointX3, LinePointY3], [LinePointX4, LinePointY4], LineThickness)
 
-            offset_x, offset_y = (meleeEnemyRect.left - heroRect.left), (meleeEnemyRect.top - heroRect.top) 
+            offset_x, offset_y = (meleeEnemyRect.left - heroRect.left), (meleeEnemyRect.top - heroRect.top)
             if (hero.imageMask.overlap(meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+                lead_x -= lead_x_change
+                lead_y -= lead_y_change
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (backgroundImage1Rect.left - heroRect.left), (backgroundImage1Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage1.imageMask, (offset_x, offset_y)) != None):
+                lead_x -= lead_x_change
+                lead_y -= lead_y_change
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (backgroundImage2Rect.left - heroRect.left), (backgroundImage2Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage2.imageMask, (offset_x, offset_y)) != None):
+                lead_x -= lead_x_change
+                lead_y -= lead_y_change
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (backgroundImage3Rect.left - heroRect.left), (backgroundImage3Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage3.imageMask, (offset_x, offset_y)) != None):
+                lead_x -= lead_x_change
+                lead_y -= lead_y_change
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (backgroundImage4Rect.left - heroRect.left), (backgroundImage4Rect.top - heroRect.top)
             if (hero.imageMask.overlap(backgroundImage4.imageMask, (offset_x, offset_y)) != None):
+                lead_x -= lead_x_change
+                lead_y -= lead_y_change
                 print 'Collision Detected!'
-            else:
-                print 'None'
-            
+
             pygame.display.update()
             clock.tick(FPS)
 
