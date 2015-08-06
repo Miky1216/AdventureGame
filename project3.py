@@ -13,14 +13,22 @@ class sprites(pygame.sprite.Sprite):
 
 class spriteNames:
     def __init__(self):
+        self.backgroundSpace = sprites('space.png', 1, 1)
         self.hero = sprites('hero.png', 1, 1)
         self.meleeEnemy = sprites('meleeEnemy.png', 1, 1)
         self.powerUp = sprites('powerUp.png', 1, 1)
         self.fryingPan = sprites('fryingPan.png', 1, 1)
         self.backgroundImage1 = sprites('QuadImage1.png', 1, 1)
-        self.backgroundImage2 = sprites('QuadImage2.png', 1, 1)
-        self.backgroundImage3 = sprites('QuadImage3.png', 1, 1)
-        self.backgroundImage4 = sprites('QuadImage4.png', 1, 1)
+        self.backgroundJakeHimself = sprites('QuadImage1.png', 1, 1)
+        self.backgroundIceKing = sprites('QuadImage2.png', 1, 1)
+        self.backgroundFinn = sprites('QuadImage3.png', 1, 1)
+        self.backgroundJakeFinn = sprites('QuadImage4.png', 1, 1)
+        self.backgroundFinnUnicorn = sprites('QuadImage5.png', 1, 1)
+        self.backgroundPenguin = sprites('QuadImage6.png', 1, 1)
+        self.backgroundCupcake = sprites('QuadImage7.png', 1, 1)
+        self.backgroundPurpleCloud = sprites('QuadImage8.png', 1, 1)
+        self.backgroundVampire = sprites('QuadImage9.png', 1, 1)
+        self.backgroundPrincess = sprites('QuadImage10.png', 1, 1)
 
 class userInput:
     def EnterHeroName(self):
@@ -31,117 +39,103 @@ class userInput:
 
 class MapDesign:
     def GenerateRandomMap(self, sprite):
-        RandomMapGenerator = random.randint(1,4)
+        RandomMapGenerator = random.randint(1,2)
         if RandomMapGenerator == 1:
-            sprite.backgroundImage1.rect.topleft = (110, 80)
-            sprite.backgroundImage2.rect.topleft = (820, 30)
-            sprite.backgroundImage3.rect.topleft = (210, 510)
-            sprite.backgroundImage4.rect.topleft = (750, 490)
+            sprite.backgroundJakeHimself.rect.topleft = (110, 80)
+            sprite.backgroundIceKing.rect.topleft = (620, 30)
+            sprite.backgroundFinn.rect.topleft = (980, 80)
+            sprite.backgroundJakeFinn.rect.topleft = (650, 410)
+            sprite.backgroundFinnUnicorn.rect.topleft = (350, 500)
+            sprite.backgroundPenguin.rect.topleft = (50, 450)
+            sprite.backgroundCupcake.rect.topleft = (900, 600)
+            sprite.backgroundPurpleCloud.rect.topleft = (950, 275)
+            sprite.backgroundVampire.rect.topleft = (500, 275)
+            sprite.backgroundPrincess.rect.topleft = (665, 600)
         if RandomMapGenerator == 2:
-            sprite.backgroundImage1.rect.topleft = (820, 30)
-            sprite.backgroundImage2.rect.topleft = (110, 80)
-            sprite.backgroundImage3.rect.topleft = (750, 490)
-            sprite.backgroundImage4.rect.topleft = (210, 510)
-        if RandomMapGenerator == 3:
-            sprite.backgroundImage1.rect.topleft = (750, 490)
-            sprite.backgroundImage2.rect.topleft = (210, 510)
-            sprite.backgroundImage3.rect.topleft = (820, 30)
-            sprite.backgroundImage4.rect.topleft = (110, 80)
-        if RandomMapGenerator == 4:
-            sprite.backgroundImage1.rect.topleft = (210, 510)
-            sprite.backgroundImage2.rect.topleft = (750, 490)
-            sprite.backgroundImage3.rect.topleft = (110, 80)
-            sprite.backgroundImage4.rect.topleft = (820, 30)
+            sprite.backgroundJakeHimself.rect.topleft = (820, 30)
+            sprite.backgroundIceKing.rect.topleft = (110, 80)
+            sprite.backgroundFinn.rect.topleft = (750, 300)
+            sprite.backgroundJakeFinn.rect.topleft = (210, 510)
+            sprite.backgroundFinnUnicorn.rect.topleft = (50, 650)
+            sprite.backgroundPenguin.rect.topleft = (350, 500)
+            sprite.backgroundCupcake.rect.topleft = (950, 275)
+            sprite.backgroundPurpleCloud.rect.topleft = (1000, 500)
+            sprite.backgroundVampire.rect.topleft = (665, 600)
+            sprite.backgroundPrincess.rect.topleft = (500, 275)
 
 class GameLoop:
     def display(self, screen, sprite):
         screen.blit(sprite.hero.image, sprite.hero.rect.topleft)
         screen.blit(sprite.meleeEnemy.image, sprite.meleeEnemy.rect.topleft)
         #screen.blit(powerUp.image, powerUp.rect.topleft)
-        screen.blit(sprite.backgroundImage1.image, sprite.backgroundImage1.rect.topleft)
-        screen.blit(sprite.backgroundImage2.image, sprite.backgroundImage2.rect.topleft)
-        screen.blit(sprite.backgroundImage3.image, sprite.backgroundImage3.rect.topleft)
-        screen.blit(sprite.backgroundImage4.image, sprite.backgroundImage4.rect.topleft)
+        screen.blit(sprite.hero.image, sprite.hero.rect.topleft)
+        screen.blit(sprite.meleeEnemy.image, sprite.meleeEnemy.rect.topleft)
+        screen.blit(sprite.powerUp.image, sprite.powerUp.rect.topleft)
+        screen.blit(sprite.backgroundJakeHimself.image, sprite.backgroundJakeHimself.rect.topleft)
+        screen.blit(sprite.backgroundIceKing.image, sprite.backgroundIceKing.rect.topleft)
+        screen.blit(sprite.backgroundFinn.image, sprite.backgroundFinn.rect.topleft)
+        screen.blit(sprite.backgroundJakeFinn.image, sprite.backgroundJakeFinn.rect.topleft)
+        screen.blit(sprite.backgroundFinnUnicorn.image, sprite.backgroundFinnUnicorn.rect.topleft)
+        screen.blit(sprite.backgroundPenguin.image, sprite.backgroundPenguin.rect.topleft)
+        screen.blit(sprite.backgroundCupcake.image, sprite.backgroundCupcake.rect.topleft)
+        screen.blit(sprite.backgroundPurpleCloud.image, sprite.backgroundPurpleCloud.rect.topleft)
+        screen.blit(sprite.backgroundVampire.image, sprite.backgroundVampire.rect.topleft)
+        screen.blit(sprite.backgroundPrincess.image, sprite.backgroundPrincess.rect.topleft)
         pygame.display.update()
     def meleeAttack(self, direction, lead_x, lead_y, screen, sprite):
         pass
     def rangeAttack(self, direction, lead_x, lead_y, screen, sprite):
         sprite.fryingPan.rect = sprite.fryingPan.image.get_rect()
         if direction == 1:
-            for lead_y in range (lead_y, 0, -1):
+            for lead_y in range (lead_y, 0, -10):
                 sprite.fryingPan.rect.topleft = (lead_x, lead_y)
-                screen.fill((255,255,255))
+                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
         if direction == 2:
-            for lead_x in range (lead_x, 1200):
+            for lead_x in range (lead_x, 1200, 10):
                 sprite.fryingPan.rect.topleft = (lead_x, lead_y)
-                screen.fill((255,255,255))
+                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
         if direction == 3:
-            for lead_y in range (lead_y, 800):
+            for lead_y in range (lead_y, 800, 10):
                 sprite.fryingPan.rect.topleft = (lead_x, lead_y)
-                screen.fill((255,255,255))
+                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
         if direction == 4:
-            for lead_x in range (lead_x, 0, -1):
+            for lead_x in range (lead_x, 0, -10):
                 sprite.fryingPan.rect.topleft = (lead_x, lead_y)
-                screen.fill((255,255,255))
+                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
                 screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
                 self.display(screen, sprite)
     def AOEAttack(self, direction, lead_x, lead_y, screen, sprite):
         pass
     def RunGame(self):
-        LinePointX1 = 600
-        LinePointY1 = 0
-        LinePointX2 = 600
-        LinePointY2 = 800
-
-        LineThickness = 1
-
-        LinePointX3 = 0
-        LinePointY3 = 400
-        LinePointX4 = 1200
-        LinePointY4 = 400
-
         pygame.init()
-
         displayWidth = 1200
         displayHeight = 800
         pygame.display.set_caption('Bacon Pancakes!')
         screen = pygame.display.set_mode([displayWidth, displayHeight])
         clock = pygame.time.Clock()
-
         FPS = 30
         gameExit = False
         heroMelee = False
         heroRanged = True
         heroAOE = False
-
-        #hero = sprites('hero.png', 1, 1)
-        #meleeEnemy = sprites('meleeEnemy.png', 1, 1)
-        #powerUp = sprites('powerUp.png', 1, 1)
-        #backgroundImage1 = sprites('QuadImage1.png', 1, 1)
-        #backgroundImage2 = sprites('QuadImage2.png', 1, 1)
-        #backgroundImage3 = sprites('QuadImage3.png', 1, 1)
-        #backgroundImage4 = sprites('QuadImage4.png', 1, 1)
-
         lead_x = 200
         lead_y = 400
         lead_x_change = 0
         lead_y_change = 0
         pixelMove = 10
         direction = 2
-
         sprite = spriteNames()
         sprite.meleeEnemy.rect.topleft = (800, 400)
         sprite.powerUp.rect.topleft = (400, 400)
-        screen.fill((255,255,255))
-
         GenerateRandomBackground = MapDesign()
         RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(sprite)
+
         while not gameExit:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -174,6 +168,7 @@ class GameLoop:
 
             lead_x += lead_x_change
             lead_y += lead_y_change
+
             if lead_x >= displayWidth:
                 lead_x = displayWidth-pixelMove
             if lead_y >= displayHeight:
@@ -184,36 +179,31 @@ class GameLoop:
                 lead_y = 0
  
             sprite.hero.rect.topleft = (lead_x, lead_y)
-            screen.fill((255,255,255))
+            screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
             self.display(screen, sprite)
-
-            #Vertical Line
-            #pygame.draw.line(screen, color.black, [LinePointX1, LinePointY1], [LinePointX2, LinePointY2], LineThickness)
-            #Horizontal Line
-            #pygame.draw.line(screen, color.black, [LinePointX3, LinePointY3], [LinePointX4, LinePointY4], LineThickness)
 
             offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.hero.rect.left), (sprite.meleeEnemy.rect.top - sprite.hero.rect.top) 
             if (sprite.hero.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
-            offset_x, offset_y = (sprite.backgroundImage1.rect.left - sprite.hero.rect.left), (sprite.backgroundImage1.rect.top - sprite.hero.rect.top)
-            if (sprite.hero.imageMask.overlap(sprite.backgroundImage1.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (sprite.backgroundJakeHimself.rect.left - sprite.hero.rect.left), (sprite.backgroundJakeHimself.rect.top - sprite.hero.rect.top)
+            if (sprite.hero.imageMask.overlap(sprite.backgroundJakeHimself.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
-            offset_x, offset_y = (sprite.backgroundImage2.rect.left - sprite.hero.rect.left), (sprite.backgroundImage2.rect.top - sprite.hero.rect.top)
-            if (sprite.hero.imageMask.overlap(sprite.backgroundImage2.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (sprite.backgroundIceKing.rect.left - sprite.hero.rect.left), (sprite.backgroundIceKing.rect.top - sprite.hero.rect.top)
+            if (sprite.hero.imageMask.overlap(sprite.backgroundIceKing.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
-            offset_x, offset_y = (sprite.backgroundImage3.rect.left - sprite.hero.rect.left), (sprite.backgroundImage3.rect.top - sprite.hero.rect.top)
-            if (sprite.hero.imageMask.overlap(sprite.backgroundImage3.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (sprite.backgroundFinn.rect.left - sprite.hero.rect.left), (sprite.backgroundFinn.rect.top - sprite.hero.rect.top)
+            if (sprite.hero.imageMask.overlap(sprite.backgroundFinn.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
-            offset_x, offset_y = (sprite.backgroundImage4.rect.left - sprite.hero.rect.left), (sprite.backgroundImage4.rect.top - sprite.hero.rect.top)
-            if (sprite.hero.imageMask.overlap(sprite.backgroundImage4.imageMask, (offset_x, offset_y)) != None):
+            offset_x, offset_y = (sprite.backgroundJakeFinn.rect.left - sprite.hero.rect.left), (sprite.backgroundJakeFinn.rect.top - sprite.hero.rect.top)
+            if (sprite.hero.imageMask.overlap(sprite.backgroundJakeFinn.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
             else:
                 print 'None'
