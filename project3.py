@@ -67,10 +67,9 @@ class GameLoop:
     def display(self, screen, sprite):
         screen.blit(sprite.hero.image, sprite.hero.rect.topleft)
         screen.blit(sprite.meleeEnemy.image, sprite.meleeEnemy.rect.topleft)
-        #screen.blit(powerUp.image, powerUp.rect.topleft)
         screen.blit(sprite.hero.image, sprite.hero.rect.topleft)
         screen.blit(sprite.meleeEnemy.image, sprite.meleeEnemy.rect.topleft)
-        screen.blit(sprite.powerUp.image, sprite.powerUp.rect.topleft)
+        #screen.blit(sprite.powerUp.image, sprite.powerUp.rect.topleft)
         screen.blit(sprite.backgroundJakeHimself.image, sprite.backgroundJakeHimself.rect.topleft)
         screen.blit(sprite.backgroundIceKing.image, sprite.backgroundIceKing.rect.topleft)
         screen.blit(sprite.backgroundFinn.image, sprite.backgroundFinn.rect.topleft)
@@ -124,13 +123,12 @@ class GameLoop:
         heroMelee = False
         heroRanged = True
         heroAOE = False
-        lead_x = 200
-        lead_y = 400
         lead_x_change = 0
         lead_y_change = 0
         pixelMove = 10
         direction = 2
         sprite = spriteNames()
+        sprite.hero.rect.topleft = (200,400)
         sprite.meleeEnemy.rect.topleft = (800, 400)
         sprite.powerUp.rect.topleft = (400, 400)
         GenerateRandomBackground = MapDesign()
@@ -155,58 +153,47 @@ class GameLoop:
                         direction = 3
                     elif event.key == pygame.K_SPACE:
                         if heroMelee:
-                            self.meleeAttack(direction, lead_x, lead_y, screen, sprite)
+                            self.meleeAttack(direction, screen, sprite)
                         if heroRanged:
-                            self.rangeAttack(direction, lead_x, lead_y, screen, sprite)
+                            self.rangeAttack(direction, screen, sprite)
                         if heroAOE:
-                            self.AOEAttack(direction, lead_x, lead_y, screen, sprite)
+                            self.AOEAttack(direction, screen, sprite)
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                         lead_x_change = 0
                         lead_y_change = 0
 
-            lead_x += lead_x_change
-            lead_y += lead_y_change
-
-            if lead_x >= displayWidth:
-                lead_x = displayWidth-pixelMove
-            if lead_y >= displayHeight:
-                lead_y = displayHeight-50
-            if lead_x <= 0:
-                lead_x = 0
-            if lead_y <= 0:
-                lead_y = 0
- 
-            sprite.hero.rect.topleft = (lead_x, lead_y)
+            sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0] + lead_x_change, sprite.hero.rect.topleft[1])
+            sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0], sprite.hero.rect.topleft[1] + lead_y_change)
+            
+            if sprite.hero.rect.topleft[0] >= displayWidth:
+                sprite.hero.rect.topleft[0] = displayWidth-pixelMove
+            if sprite.hero.rect.topleft[1] >= displayHeight:
+                sprite.hero.rect.topleft[1] = displayHeight-50
+            if sprite.hero.rect.topleft[0] <= 0:
+                sprite.hero.rect.topleft = (0, sprite.hero.rect.topleft[1])
+            if sprite.hero.rect.topleft[1] <= 0:
+                sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0],0)
+            
             screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
             self.display(screen, sprite)
 
             offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.hero.rect.left), (sprite.meleeEnemy.rect.top - sprite.hero.rect.top) 
             if (sprite.hero.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (sprite.backgroundJakeHimself.rect.left - sprite.hero.rect.left), (sprite.backgroundJakeHimself.rect.top - sprite.hero.rect.top)
             if (sprite.hero.imageMask.overlap(sprite.backgroundJakeHimself.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (sprite.backgroundIceKing.rect.left - sprite.hero.rect.left), (sprite.backgroundIceKing.rect.top - sprite.hero.rect.top)
             if (sprite.hero.imageMask.overlap(sprite.backgroundIceKing.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (sprite.backgroundFinn.rect.left - sprite.hero.rect.left), (sprite.backgroundFinn.rect.top - sprite.hero.rect.top)
             if (sprite.hero.imageMask.overlap(sprite.backgroundFinn.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
-            else:
-                print 'None'
             offset_x, offset_y = (sprite.backgroundJakeFinn.rect.left - sprite.hero.rect.left), (sprite.backgroundJakeFinn.rect.top - sprite.hero.rect.top)
             if (sprite.hero.imageMask.overlap(sprite.backgroundJakeFinn.imageMask, (offset_x, offset_y)) != None):
                 print 'Collision Detected!'
-            else:
-                print 'None'
 
             clock.tick(FPS)
 
