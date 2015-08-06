@@ -25,12 +25,12 @@ class userInput:
         return HeroName
 
 class MapDesign:
-    def GenerateRandomMap():
-        Quad1Coordinates = pygame.draw.rect(gameDisplay, white, [0,0])
-        Quad2Coordinates = pygame.draw.rect(gameDisplay, white, [400,0])
-        Quad3Coordinates = pygame.draw.rect(gameDisplay, white, [0,300])
-        Quad4Coordinates = pygame.draw.rect(gameDisplay, white, [400,600])
-
+    def GenerateRandomMap(self, backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect):
+        #Quad1Coordinates = pygame.draw.rect(gameDisplay, white, [0,0])
+        #Quad2Coordinates = pygame.draw.rect(gameDisplay, white, [400,0])
+        #Quad3Coordinates = pygame.draw.rect(gameDisplay, white, [0,300])
+        #Quad4Coordinates = pygame.draw.rect(gameDisplay, white, [400,600])
+        
         backgroundImage1Rect.topleft = (110, 80)
         backgroundImage2Rect.topleft = (820, 30)
         backgroundImage3Rect.topleft = (210, 510)
@@ -56,23 +56,14 @@ class MapDesign:
             backgroundImage2Rect.topleft = (750, 490)
             backgroundImage3Rect.topleft = (110, 80)
             backgroundImage4Rect.topleft = (820, 30)
-    def DesignedBackground(self):
-        pass
-    def FirstQuadrantBackground(self):
-        pass
-    def SecondQuadrantBackground(self): 
-        pass
-    def ThirdQuadrantBackground(self):
-        pass
-    def FourthQuadrantBackground(self):
-        pass
+
 
 class GameLoop:
-    def meleeAttack(self, direction):
+    def meleeAttack(self):
         pass
-    def rangeAttack(self, direction):
+    def rangeAttack(self):
         pass
-    def AOEAttack(self, direction):
+    def AOEAttack(self):
         pass
     def RunGame(self):
         LinePointX1 = 600
@@ -86,7 +77,7 @@ class GameLoop:
         LinePointY3 = 400
         LinePointX4 = 1200
         LinePointY4 = 400
-
+        
         pygame.init()
 
         displayWidth = 1200
@@ -106,20 +97,17 @@ class GameLoop:
         hero = sprites('hero.png', 1, 1, color)
         meleeEnemy = sprites('meleeEnemy.png', 1, 1, color)
         powerUp = sprites('powerUp.png', 1, 1, color)
-        fryingPan = sprites('fryingPan.png', 1, 1, color)
         backgroundImage1 = sprites('QuadImage1.png', 1, 1, color)
         backgroundImage2 = sprites('QuadImage2.png', 1, 1, color)
         backgroundImage3 = sprites('QuadImage3.png', 1, 1, color)
         backgroundImage4 = sprites('QuadImage4.png', 1, 1, color)
-        #PlayerName = UserInput()
 
         lead_x = 300
         lead_y = 300
         lead_x_change = 0
         lead_y_change = 0
         pixelMove = 10
-        direction = 1
-
+        
         heroRect = hero.image.get_rect()
         meleeEnemyRect = meleeEnemy.image.get_rect()
         powerUpRect = powerUp.image.get_rect()
@@ -127,7 +115,7 @@ class GameLoop:
         backgroundImage2Rect = backgroundImage2.image.get_rect()
         backgroundImage3Rect = backgroundImage3.image.get_rect()
         backgroundImage4Rect = backgroundImage4.image.get_rect()
-
+        
         heroRect.topleft = (0, 400)
         meleeEnemyRect.topleft = (0, 0)
         powerUpRect.topleft = (600, 600)
@@ -135,27 +123,24 @@ class GameLoop:
         backgroundImage2Rect.topleft = (820, 30)
         backgroundImage3Rect.topleft = (210, 510)
         backgroundImage4Rect.topleft = (750, 490)
-
+        
         pygame.mouse.set_visible(False)
- 
+        
+        GenerateRandomBackground = MapDesign()
+        RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(backgroundImage1Rect, backgroundImage2Rect, backgroundImage3Rect, backgroundImage4Rect)
         while not gameExit:
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     gameExit = True
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         lead_x_change = -pixelMove
-                        direction = 4
                     elif event.key == pygame.K_RIGHT:
                         lead_x_change = pixelMove
-                        direction = 2
                     elif event.key == pygame.K_UP:
                         lead_y_change = -pixelMove
-                        direction = 1
                     elif event.key == pygame.K_DOWN:
                         lead_y_change = pixelMove
-                        direction = 3
                     elif event.key == pygame.K_SPACE:
                         heroFire = True
 
@@ -163,11 +148,11 @@ class GameLoop:
 
                 if heroFire:
                     if heroMelee:
-                        self.meleeAttack(direction)
+                        self.meleeAttack()
                     if heroRanged:
-                        self.rangeAttack(direction)
+                        self.rangeAttack()
                     if heroAOE:
-                        self.AOEAttack(direction)
+                        self.AOEAttack()
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
@@ -187,17 +172,17 @@ class GameLoop:
 
             #meleeEnemyRect.topleft = pygame.mouse.get_pos()
             heroRect.topleft = (lead_x, lead_y)
-
+            
             screen.fill(color.white)
-            #screen.blit(hero.image, heroRect.topleft)
+            screen.blit(hero.image, heroRect.topleft)
             screen.blit(meleeEnemy.image, meleeEnemyRect.topleft)
             screen.blit(powerUp.image, powerUpRect.topleft)
             screen.blit(backgroundImage1.image, backgroundImage1Rect.topleft)
             screen.blit(backgroundImage2.image, backgroundImage2Rect.topleft)
             screen.blit(backgroundImage3.image, backgroundImage3Rect.topleft)
             screen.blit(backgroundImage4.image, backgroundImage4Rect.topleft)
-
-
+            
+            
             #Vertical Line
             pygame.draw.line(screen, color.black, [LinePointX1, LinePointY1], [LinePointX2, LinePointY2], LineThickness)
             #Horizontal Line
