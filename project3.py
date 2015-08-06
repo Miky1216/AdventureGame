@@ -30,7 +30,7 @@ class MapDesign:
         Quad2Coordinates = pygame.draw.rect(gameDisplay, white, [400,0])
         Quad3Coordinates = pygame.draw.rect(gameDisplay, white, [0,300])
         Quad4Coordinates = pygame.draw.rect(gameDisplay, white, [400,600])
-        
+
         backgroundImage1Rect.topleft = (110, 80)
         backgroundImage2Rect.topleft = (820, 30)
         backgroundImage3Rect.topleft = (210, 510)
@@ -68,11 +68,11 @@ class MapDesign:
         pass
 
 class GameLoop:
-    def meleeAttack(self):
+    def meleeAttack(self, direction):
         pass
-    def rangeAttack(self):
+    def rangeAttack(self, direction):
         pass
-    def AOEAttack(self):
+    def AOEAttack(self, direction):
         pass
     def RunGame(self):
         LinePointX1 = 600
@@ -86,7 +86,7 @@ class GameLoop:
         LinePointY3 = 400
         LinePointX4 = 1200
         LinePointY4 = 400
-        
+
         pygame.init()
 
         displayWidth = 1200
@@ -106,6 +106,7 @@ class GameLoop:
         hero = sprites('hero.png', 1, 1, color)
         meleeEnemy = sprites('meleeEnemy.png', 1, 1, color)
         powerUp = sprites('powerUp.png', 1, 1, color)
+        fryingPan = sprites('fryingPan.png', 1, 1, color)
         backgroundImage1 = sprites('QuadImage1.png', 1, 1, color)
         backgroundImage2 = sprites('QuadImage2.png', 1, 1, color)
         backgroundImage3 = sprites('QuadImage3.png', 1, 1, color)
@@ -117,7 +118,8 @@ class GameLoop:
         lead_x_change = 0
         lead_y_change = 0
         pixelMove = 10
-        
+        direction = 1
+
         heroRect = hero.image.get_rect()
         meleeEnemyRect = meleeEnemy.image.get_rect()
         powerUpRect = powerUp.image.get_rect()
@@ -125,7 +127,7 @@ class GameLoop:
         backgroundImage2Rect = backgroundImage2.image.get_rect()
         backgroundImage3Rect = backgroundImage3.image.get_rect()
         backgroundImage4Rect = backgroundImage4.image.get_rect()
-        
+
         heroRect.topleft = (0, 400)
         meleeEnemyRect.topleft = (0, 0)
         powerUpRect.topleft = (600, 600)
@@ -133,7 +135,7 @@ class GameLoop:
         backgroundImage2Rect.topleft = (820, 30)
         backgroundImage3Rect.topleft = (210, 510)
         backgroundImage4Rect.topleft = (750, 490)
-        
+
         pygame.mouse.set_visible(False)
  
         while not gameExit:
@@ -144,12 +146,16 @@ class GameLoop:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         lead_x_change = -pixelMove
+                        direction = 4
                     elif event.key == pygame.K_RIGHT:
                         lead_x_change = pixelMove
+                        direction = 2
                     elif event.key == pygame.K_UP:
                         lead_y_change = -pixelMove
+                        direction = 1
                     elif event.key == pygame.K_DOWN:
                         lead_y_change = pixelMove
+                        direction = 3
                     elif event.key == pygame.K_SPACE:
                         heroFire = True
 
@@ -157,11 +163,11 @@ class GameLoop:
 
                 if heroFire:
                     if heroMelee:
-                        self.meleeAttack()
+                        self.meleeAttack(direction)
                     if heroRanged:
-                        self.rangeAttack()
+                        self.rangeAttack(direction)
                     if heroAOE:
-                        self.AOEAttack()
+                        self.AOEAttack(direction)
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
@@ -181,17 +187,17 @@ class GameLoop:
 
             #meleeEnemyRect.topleft = pygame.mouse.get_pos()
             heroRect.topleft = (lead_x, lead_y)
-            
+
             screen.fill(color.white)
-            screen.blit(hero.image, heroRect.topleft)
+            #screen.blit(hero.image, heroRect.topleft)
             screen.blit(meleeEnemy.image, meleeEnemyRect.topleft)
             screen.blit(powerUp.image, powerUpRect.topleft)
             screen.blit(backgroundImage1.image, backgroundImage1Rect.topleft)
             screen.blit(backgroundImage2.image, backgroundImage2Rect.topleft)
             screen.blit(backgroundImage3.image, backgroundImage3Rect.topleft)
             screen.blit(backgroundImage4.image, backgroundImage4Rect.topleft)
-            
-            
+
+
             #Vertical Line
             pygame.draw.line(screen, color.black, [LinePointX1, LinePointY1], [LinePointX2, LinePointY2], LineThickness)
             #Horizontal Line
