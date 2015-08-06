@@ -198,8 +198,8 @@ class GameLoop:
         pixelMove = 10
         direction = 2
         sprite = spriteNames()
-        sprite.hero.rect.topleft = (200,400)
-        sprite.meleeEnemy.rect.topleft = (800, 400)
+        sprite.hero.rect.topleft = (30,30)
+        sprite.meleeEnemy.rect.topleft = (1150, 720)
         sprite.powerUp.rect.topleft = (400, 400)
         GenerateRandomBackground = MapDesign()
         RandomMapGenerator = GenerateRandomBackground.GenerateRandomMap(sprite)
