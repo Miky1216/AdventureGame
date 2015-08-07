@@ -39,7 +39,7 @@ class colors:
         self.black = (0,0,0)
         self.red = (255,0,0)
         self.green = (0,255,0)
-        
+        self.yellow = (255,255,0)
     
 class Hero:
     def __init__(self, name, playerHealth):
@@ -75,6 +75,7 @@ class AOEEnemy(Enemy):
 class BossEnemy(Enemy):
     def __init__(self):
         pass
+
 class userInput:
     def EnterHeroName(self):
         HeroName = ""
@@ -234,21 +235,28 @@ class GameLoop:
             sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0], sprite.hero.rect.topleft[1] - lead_y_change)
             print 'Collision Detected!' 
         
+        #Health Bars
         color = colors()
         displayWidth = 1200
         displayHeight = 800
         
-        playerHealth = 100
+        playerHealth =  100
         enemyHealth = 100
+        playerHealthColor = color.black
+        enemyHealthColor = color.black
         
-        if playerHealth > 30:
+        if playerHealth > 75:
             playerHealthColor = color.green
+        elif playerHealth > 50:
+            playerHealthColor = color.yellow
         else:
-           playerHealth = color.red
-        if enemyHealth > 30:
+           playerHealthColor = color.red
+        if enemyHealth > 75:
             enemyHealthColor = color.green
+        elif enemyHealth > 50:
+            enemyHealthColor = color.yellow
         else:
-           enemyHealth = color.red
+           enemyHealthColor = color.red
            
         pygame.draw.rect(screen, playerHealthColor, [300, 10, playerHealth, 20])
         pygame.draw.rect(screen, enemyHealthColor, [700, 10, enemyHealth, 20])
@@ -261,44 +269,57 @@ class GameLoop:
         screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
         
         offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top) 
-        if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+        if (sprite.hero.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.rangedEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.rangedEnemy.rect.top - sprite.fryingPan.rect.top) 
-        if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
+        if (sprite.hero.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.aoeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.aoeEnemy.rect.top - sprite.fryingPan.rect.top) 
-        if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
+        if (sprite.hero.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.bossEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.bossEnemy.rect.top - sprite.fryingPan.rect.top) 
-        if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
+        if (sprite.hero.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundJakeHimself.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundJakeHimself.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundJakeHimself.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundIceKing.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundIceKing.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundIceKing.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundFinn.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundFinn.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundFinn.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundJakeFinn.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundJakeFinn.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundJakeFinn.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundFinnUnicorn.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundFinnUnicorn.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundFinnUnicorn.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundPenguin.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundPenguin.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundPenguin.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundCupcake.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundCupcake.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundCupcake.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundPurpleCloud.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundPurpleCloud.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundPurpleCloud.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundVampire.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundVampire.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundVampire.imageMask, (offset_x, offset_y)) != None):
             collision = True
+            
         offset_x, offset_y = (sprite.backgroundPrincess.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundPrincess.rect.top - sprite.fryingPan.rect.top)
         if (sprite.hero.imageMask.overlap(sprite.backgroundPrincess.imageMask, (offset_x, offset_y)) != None):
             collision = True
@@ -355,7 +376,6 @@ class GameLoop:
                     print "Hit target"
                     damage = 25 
                     return damage
-                    #https://www.youtube.com/watch?v=J5TuuuZwQwI
         if direction == 2:
             while not collision:
                 x = x + 10
@@ -384,8 +404,6 @@ class GameLoop:
                 self.display(screen, sprite, 0, 0)
                 offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
 
-    def AOEAttack(self, direction, screen, sprite):
-        pass
     
     def RunGame(self):
         pygame.init()
@@ -459,9 +477,9 @@ class GameLoop:
             sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0], sprite.hero.rect.topleft[1] + lead_y_change)
             
             if sprite.hero.rect.topleft[0] >= displayWidth:
-                sprite.hero.rect.topleft[0] = displayWidth-pixelMove
+                sprite.hero.rect.topleft = (0, sprite.hero.rect.topleft[1])
             if sprite.hero.rect.topleft[1] >= displayHeight:
-                sprite.hero.rect.topleft[1] = displayHeight-50
+                sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0],0)
             if sprite.hero.rect.topleft[0] <= 0:
                 sprite.hero.rect.topleft = (0, sprite.hero.rect.topleft[1])
             if sprite.hero.rect.topleft[1] <= 0:
