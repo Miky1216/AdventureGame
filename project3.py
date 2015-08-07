@@ -82,17 +82,6 @@ class userInput:
             HeroName = raw_input("Enter the name of your hero: ")
         return HeroName
         
-class MessageOnScreen():
-    def TextObjects(text, color):
-        textSurface = font.render(text, True, color)
-        return textSurface, textSurface.get_rect()
-
-    def MessageToScreen(msg, color):
-        textSurface, textRect = textObjects(msg, color)
-        #screenText = font.render(msg, True, color)
-        #screen.blit(ScreenText,[display_width/2, display_height/2])
-        textRect.center = (display_width/2), (display_height/2)
-        screen.blit(TextSurface, TextRect)
 
 class MapDesign:
     def GenerateRandomMap(self, sprite):
@@ -152,6 +141,7 @@ class GameLoop:
         screen.blit(sprite.aoeEnemy.image, sprite.aoeEnemy.rect.topleft)
         screen.blit(sprite.bossEnemy.image, sprite.bossEnemy.rect.topleft)
         screen.blit(sprite.powerUp.image, sprite.powerUp.rect.topleft)
+        #screen.blit(sprite.powerUp.image, sprite.powerUp.rect.topleft)
         screen.blit(sprite.backgroundJakeHimself.image, sprite.backgroundJakeHimself.rect.topleft)
         screen.blit(sprite.backgroundIceKing.image, sprite.backgroundIceKing.rect.topleft)
         screen.blit(sprite.backgroundFinn.image, sprite.backgroundFinn.rect.topleft)
@@ -162,8 +152,7 @@ class GameLoop:
         screen.blit(sprite.backgroundPurpleCloud.image, sprite.backgroundPurpleCloud.rect.topleft)
         screen.blit(sprite.backgroundVampire.image, sprite.backgroundVampire.rect.topleft)
         screen.blit(sprite.backgroundPrincess.image, sprite.backgroundPrincess.rect.topleft)
-        
-        
+
         offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.hero.rect.left), (sprite.meleeEnemy.rect.top - sprite.hero.rect.top) 
         if (sprite.hero.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
             sprite.hero.rect.topleft = (sprite.hero.rect.topleft[0] - lead_x_change, sprite.hero.rect.topleft[1])
@@ -266,7 +255,55 @@ class GameLoop:
         
         pygame.display.update()
         return sprite
-    
+
+    def fryingPan(self, screen, sprite, collision):
+        screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
+        screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+        
+        offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top) 
+        if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.rangedEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.rangedEnemy.rect.top - sprite.fryingPan.rect.top) 
+        if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.aoeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.aoeEnemy.rect.top - sprite.fryingPan.rect.top) 
+        if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.bossEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.bossEnemy.rect.top - sprite.fryingPan.rect.top) 
+        if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundJakeHimself.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundJakeHimself.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundJakeHimself.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundIceKing.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundIceKing.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundIceKing.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundFinn.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundFinn.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundFinn.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundJakeFinn.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundJakeFinn.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundJakeFinn.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundFinnUnicorn.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundFinnUnicorn.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundFinnUnicorn.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundPenguin.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundPenguin.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundPenguin.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundCupcake.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundCupcake.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundCupcake.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundPurpleCloud.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundPurpleCloud.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundPurpleCloud.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundVampire.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundVampire.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundVampire.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        offset_x, offset_y = (sprite.backgroundPrincess.rect.left - sprite.fryingPan.rect.left), (sprite.backgroundPrincess.rect.top - sprite.fryingPan.rect.top)
+        if (sprite.hero.imageMask.overlap(sprite.backgroundPrincess.imageMask, (offset_x, offset_y)) != None):
+            collision = True
+        return collision
+
     def meleeAttack(self, direction, screen, sprite):
         color = colors()
         sprite.fryingPan.rect = sprite.fryingPan.image.get_rect()
@@ -278,72 +315,25 @@ class GameLoop:
             screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
             screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
             self.display(screen, sprite, 0, 0)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
         if direction == 2:
             #for x in range (x, 1200, 10):
             sprite.fryingPan.rect.topleft = (x, y)
             screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
             screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
             self.display(screen, sprite, 0, 0)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
         if direction == 3:
             #for y in range (y, 800, 10):
             sprite.fryingPan.rect.topleft = (x, y)
             screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
             screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
             self.display(screen, sprite, 0, 0)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
         if direction == 4:
             #for x in range (x, 0, -10):
             sprite.fryingPan.rect.topleft = (x, y)
             screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
             screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
             self.display(screen, sprite, 0, 0)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
-            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-            if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                MessageOnScreen("Hit! 10 points added to score!", color.white)
+            offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)    
     
     def rangeAttack(self, direction, screen, sprite):
         color = colors()
@@ -351,24 +341,15 @@ class GameLoop:
         sprite.fryingPan.rect = sprite.fryingPan.image.get_rect()
         x = sprite.hero.rect.topleft[0]
         y = sprite.hero.rect.topleft[1]
+        collision = False
         if direction == 1:
-            for y in range (y, 0, -10):
-                sprite.fryingPan.rect.topleft = (sprite.hero.rect.topleft[0], y)
-                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
-                screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+            while not collision:
+                y = y - 10
+                if y <= 0:
+                    collision = True
+                sprite.fryingPan.rect.topleft = (x, y)
+                collision = self.fryingPan(screen, sprite, collision)
                 self.display(screen, sprite, 0, 0)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
                     
                 if sprite.fryingPan.rect > sprite.meleeEnemy.rect:
                     print "Hit target"
@@ -376,59 +357,33 @@ class GameLoop:
                     return damage
                     #https://www.youtube.com/watch?v=J5TuuuZwQwI
         if direction == 2:
-            for x in range (x, 1200, 10):
+            while not collision:
+                x = x + 10
+                if x >= 1200:
+                    collision = True
                 sprite.fryingPan.rect.topleft = (x, y)
-                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
-                screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                collision = self.fryingPan(screen, sprite, collision)
                 self.display(screen, sprite, 0, 0)
                 offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
         if direction == 3:
-            for y in range (y, 800, 10):
+            while not collision:
+                y = y + 10
+                if y >= 800:
+                    collision = True
                 sprite.fryingPan.rect.topleft = (x, y)
-                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
-                screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                collision = self.fryingPan(screen, sprite, collision)
                 self.display(screen, sprite, 0, 0)
                 offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
         if direction == 4:
-            for x in range (x, 0, -10):
+            while not collision:
+                x = x - 10
+                if x <= 0:
+                    collision = True
                 sprite.fryingPan.rect.topleft = (x, y)
-                screen.blit(sprite.backgroundSpace.image, sprite.backgroundSpace.rect.topleft)
-                screen.blit(sprite.fryingPan.image, sprite.fryingPan.rect.topleft)
+                collision = self.fryingPan(screen, sprite, collision)
                 self.display(screen, sprite, 0, 0)
                 offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.meleeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.rangedEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.aoeEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
-                offset_x, offset_y = (sprite.meleeEnemy.rect.left - sprite.fryingPan.rect.left), (sprite.meleeEnemy.rect.top - sprite.fryingPan.rect.top)
-                if (sprite.fryingPan.imageMask.overlap(sprite.bossEnemy.imageMask, (offset_x, offset_y)) != None):
-                    MessageOnScreen("Hit! 10 points added to score!", color.white)
+
     def AOEAttack(self, direction, screen, sprite):
         pass
     
@@ -449,8 +404,8 @@ class GameLoop:
         FPS = 30
         
         gameExit = False
-        heroMelee = True
-        heroRanged = False
+        heroMelee = False
+        heroRanged = True
         heroAOE = False
         
         lead_x_change = 0
